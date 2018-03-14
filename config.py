@@ -1,4 +1,5 @@
-ABS_PATH = '/Users/rwq_mac/Documents/weibo_pictures/'
+# ABS_PATH = '/Users/rwq_mac/Documents/weibo_pictures/'
+ABS_PATH = 'D:\GitHub\get_weibo_img\\'
 YA_TING = {'uid': '2128521342',
            'luicode': '10000011',
            'lfid': '100103type=1&q=木木大雅婷',
@@ -18,3 +19,10 @@ CAI_MU_JIN = {'uid': '1035321575',
               'type': 'uid',
               'value': '1035321575',
               'containerid': '1076031035321575', }
+ZHANG_YU_XI = {'uid': '1662262590',
+               'luicode': '10000011',
+               'lfid': '100103type=1&q=张予曦',
+               'featurecode': '20000320',
+               'type': 'uid',
+               'value': '1662262590',
+               'containerid': '1076031662262590', }
