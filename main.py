@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 from config import *
 import os
 import pickle
-from multiprocessing import Pool
+from multiprocessing import Process,Pool
 
 
 def get_form_url(person):
@@ -57,6 +57,7 @@ def download_img(url, path):
 
 
 def get_pics(pic_urls, person):
+    print('start download',person['lfid'])
     path = ABS_PATH + person['lfid'].split('=')[-1] + '/'
     if not os.path.exists(ABS_PATH):
         os.mkdir(ABS_PATH)
@@ -64,6 +65,7 @@ def get_pics(pic_urls, person):
         os.mkdir(path)
     # save_as_pickle(path, pic_urls)
     for pic_url in pic_urls:
+        print('now downloading',pic_url)
         download_img(pic_url, path)
 
 
@@ -77,12 +79,16 @@ def save_as_pickle(path, pic_urls):
             pic_urls = pickle.load(f)
 
 
-def main(person):
+def downloader(person):
     urls = get_form_url(person)
     pic_urls = get_pic_url(urls)
-    print('共获得{}张照片地址'.format(len(pic_urls)))
+    print('{0}共获得{1}张照片地址'.format(person['lfid'],len(pic_urls)))
     get_pics(pic_urls, person)
 
 
 if __name__ == '__main__':
-    main(CAI_MU_JIN)
+    p=Pool()
+    p.apply_async(downloader,args=(YA_TING,))
+    p.apply_async(downloader,args=(WU_CHUN_YI,))
+    p.close()
+    p.join()
